@@ -3,8 +3,20 @@
 //   return document.getElementsByClassName(className);
 // };
 
-// But instead we're going to implement it from scratch:
-var getElementsByClassName = function(className
-){
-  // your code here
-};
+var getElementsByClassName = function(className){
+    var newArr = [];
+    getClass(document.body);
+    function getClass(item) {        
+        var itemClass = item.classList;
+        if (itemClass) {
+            if (itemClass.contains(className)) {
+                newArr.push(item);    
+            }            
+        }
+        var itemNode = item.childNodes;
+        for (var i = 0 ; i < itemNode.length; i++) {            
+            getClass(itemNode[i]);
+        }      
+    }    
+    return newArr;
+}
